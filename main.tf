@@ -53,7 +53,13 @@ resource "aws_appautoscaling_policy" "service-scale-down" {
     metric_aggregation_type = "Average"
 
     step_adjustment {
+      metric_interval_lower_bound = "0"
       metric_interval_upper_bound = "${var.service-scale-down-metricIntervalUpperBound1}"
+      scaling_adjustment          = -2
+    }
+
+    step_adjustment {
+      metric_interval_lower_bound = "${var.service-scale-down-metricIntervalUpperBound1}"
       scaling_adjustment          = -1
     }
   }
