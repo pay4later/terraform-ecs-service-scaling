@@ -72,7 +72,7 @@ EOF
 module "service-scaling" {
   source = "../"
 
-  name             = "my new service that requires autoscaling"
+  name             = "${aws_ecs_cluster.cluster.name}-${aws_ecs_service.service.name}"
   ecs-cluster-name = "${aws_ecs_cluster.cluster.name}"
   ecs-service-name = "${aws_ecs_service.service.name}"
 }
