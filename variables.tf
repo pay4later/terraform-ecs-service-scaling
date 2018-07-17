@@ -62,27 +62,3 @@ variable "service-cpu-low-period" {
   description = "Period when CloudWatch checks for low CPU usage"
   default     = "60"
 }
-
-variable "service-scale-up-metricIntervalLowerBound1" {
-  type        = "string"
-  description = "metric_interval_lower_bound value for the single increment"
-  default     = "0"
-}
-
-variable "service-scale-up-metricIntervalUpperBound1" {
-  type        = "string"
-  description = "metric_interval_lower_bound value for the double increment"
-  default     = "40"
-}
-
-variable "service-scale-up-metricIntervalLowerBound2" {
-  type        = "string"
-  description = "metric_interval_lower_bound value for the single increment"
-  default     = "40"
-}
-
-variable "service-scale-down-metricIntervalUpperBound1" {
-  type        = "string"
-  description = "metric_interval_lower_bound value for the single increment"
-  default     = "40"
-}
