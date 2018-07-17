@@ -3,7 +3,7 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 data "aws_iam_role" "ecs_app_autoscaling" {
-  name = "ecsAutoscaleRole"
+  name = "AWSServiceRoleForApplicationAutoScaling_ECSService"
 }
 
 resource "aws_appautoscaling_target" "main" {
