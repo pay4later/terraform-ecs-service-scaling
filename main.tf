@@ -7,6 +7,7 @@ data "aws_iam_role" "ecs_app_autoscaling" {
 }
 
 resource "aws_appautoscaling_target" "main" {
+  count              = "${!contains(var.skip_deployment_in_workspace, terraform.workspace) ? 1 : 0}"
   min_capacity       = "${var.services-min}"
   max_capacity       = "${var.services-max}"
   resource_id        = "service/${var.ecs-cluster-name}/${var.ecs-service-name}"
@@ -16,6 +17,7 @@ resource "aws_appautoscaling_target" "main" {
 }
 
 resource "aws_appautoscaling_policy" "service-scale-up" {
+  count              = "${!contains(var.skip_deployment_in_workspace, terraform.workspace) ? 1 : 0}"
   name               = "${var.name}-service-scale-up"
   policy_type        = "StepScaling"
   resource_id        = "${aws_appautoscaling_target.main.resource_id}"
@@ -35,6 +37,7 @@ resource "aws_appautoscaling_policy" "service-scale-up" {
 }
 
 resource "aws_appautoscaling_policy" "service-scale-down" {
+  count              = "${!contains(var.skip_deployment_in_workspace, terraform.workspace) ? 1 : 0}"
   name               = "${var.name}-service-scale-down"
   policy_type        = "StepScaling"
   resource_id        = "${aws_appautoscaling_target.main.resource_id}"
@@ -54,6 +57,7 @@ resource "aws_appautoscaling_policy" "service-scale-down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "service-cpu-high" {
+  count               = "${!contains(var.skip_deployment_in_workspace, terraform.workspace) ? 1 : 0}"
   alarm_name          = "${var.name}-service-cpu-high"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
@@ -74,6 +78,7 @@ resource "aws_cloudwatch_metric_alarm" "service-cpu-high" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "service-cpu-low" {
+  count               = "${!contains(var.skip_deployment_in_workspace, terraform.workspace) ? 1 : 0}"
   alarm_name          = "${var.name}-service-cpu-low"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = 2

@@ -62,3 +62,8 @@ variable "service-cpu-low-period" {
   description = "Period when CloudWatch checks for low CPU usage"
   default     = "60"
 }
+
+variable "skip_deployment_in_workspace" {
+  description = "Skip deployments in this list of Terraform workspaces"
+  default     = []
+}
